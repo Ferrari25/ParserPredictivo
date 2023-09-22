@@ -29,14 +29,14 @@ def procesar(cuerpo_produccion):
                 if datos_locales['error']:
                     break
                 
-  def pni(no_terminal):
-        for cuerpo_produccion in P[no_terminal]:
-            backtracking_index = datos_locales['index']
-            procesar(cuerpo_produccion)
-            if datos_locales['error']:
-                datos_locales['index'] = backtracking_index
-            else:
-                break
+def pni(no_terminal):
+    for cuerpo_produccion in P[no_terminal]:
+        backtracking_index = datos_locales['index']
+        procesar(cuerpo_produccion)
+        if datos_locales['error']:
+            datos_locales['index'] = backtracking_index
+        else:
+            break
 
 
 def principal():
