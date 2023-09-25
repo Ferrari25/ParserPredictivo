@@ -113,6 +113,15 @@ SD(Factor -> NUM)= {NUM}
 SD(Factor -> ID) = {ID}
 """
 
+
+for clave in SD['Program']:  
+    if clave== datos_locales['index']: 
+        for cuerpo_produccion in SD['Program'.get(clave)]: 
+            Procesar(cuerpo_produccion,clave)
+
+
+
+
 SD:{ 'Program':{"SI":['ListaSentencias'],
                 "REPETIR":['ListaSentencias'],
                 "ID":['ListaSentencias'],
