@@ -16,10 +16,10 @@ def parser(codigo_fuente):
     #INTENTO DE PNI GENERAL PREDICTIVO        
     def pni(no_terminal):
         caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]
-        if caracter_actual in SD[no_terminal].keys():
-            lado_derecho= SD[no_terminal][caracter_actual]
-            for lado_derecho in SD[no_terminal]:
-                procesar(lado_derecho)
+        if caracter_actual in dicSD[no_terminal].keys():
+            lado_derecho= dicSD[no_terminal][caracter_actual]
+            #for lado_derecho in SD[no_terminal]:
+            procesar(lado_derecho)
     
     
     ############## NOTAS PNI GENERICO ####################
