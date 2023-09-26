@@ -5,6 +5,7 @@ from Automatas import *
 
 
 def parser(codigo_fuente):
+    codigo_fuente.append(("#","#"))
     datos_locales = {
         'lista_tokens': codigo_fuente,
         'index': 0,
@@ -15,46 +16,13 @@ def parser(codigo_fuente):
           
     #INTENTO DE PNI GENERAL PREDICTIVO        
     def pni(no_terminal):
+        datos_locales['error']=False
         caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]
-        if caracter_actual in dicSD[no_terminal].keys():
+        if caracter_actual in dicSD[no_terminal]:
             lado_derecho= dicSD[no_terminal][caracter_actual]
-            #for lado_derecho in SD[no_terminal]:
             procesar(lado_derecho)
-    
-    
-    ############## NOTAS PNI GENERICO ####################
-    """
-    LADO_DERECHO
-    lado_derecho guarda las producciones que se puede usar dado un no-terminal
-    ej: si el no-Terminal es 'ListaSentencias' y el caracter actual (lo q se esta aputando) es "ID"
-    entonce lado_derecho almacenara la produccion "['Sentencia' ,'ListaSentencia2']"
-    ya que la definición de la gramática indica que 'ListaSentencias' puede derivar en 'Sentencia' ,'ListaSentencia2' cuando el símbolo actual es "ID".
-    
-    
-    CARACTER_ACTUAL
-    caracter_actual en tu código se refiere al símbolo actual que se está analizando en la lista de tokens.
-    Este símbolo se extrae de la lista de tokens en función del valor del índice actual 
-    
-    SD[NO_TERMINAL].KEYS()
-    es una lista de los simbolos directrices para el no terminal que se esta recorriendo 
-    
-    DICCIONARIO 
-    NOMBRE_DICCIONARIO :{NO_TERMINAL {KEY, [VALUE]} }
-    ej: SD:{ 'Program':{"SI":['ListaSentencias']}
-    key se obtiene con la funcion .key() 
-    value se obtiene con la funcion .get()
-    
-    ---IDEA DEL PNI (NO-TERMINAL)---
-    TENGO UN PUNTERO A LA CADENA 
-    
-    SI A LO QUE APUNTO EN LA CADENA EXISTE EN LOS SIMBOLOS DIRECTRICES DE MI NO TERMINAL 
-    ej w= SI A = 8 ; ==> SI ID EQUAL NUM PUNTO-COMA
-    
-    
-    OBTENGO CON QUE PRODUCCIONES TENGO ESE SIMBOLO DIRECTRIZ 
-    LUEGO ESAS PRODUCCION QUE OBTENGO, SE LAS MANDO A PROCESAR 
-    """
-    ##########################################
+        else:
+            datos_locales['error']=True
                     
 
     def procesar(cuerpo_produccion):
@@ -66,7 +34,6 @@ def parser(codigo_fuente):
                     datos_locales['index'] += 1                        
                 else:
                     datos_locales['error'] = True
-                    break
             elif simbolo in VN:
                 pni(simbolo)
                 if datos_locales['error']:
@@ -76,7 +43,7 @@ def parser(codigo_fuente):
     def principal():
         pni('Program')
         caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]
-        if caracter_actual != 'Eof' or datos_locales['error']:
+        if caracter_actual != '#' or datos_locales['error']:
             print('La cadena no pertenece al lenguaje')
             return False
         print('La cadena pertenece al lenguaje')
@@ -85,66 +52,7 @@ def parser(codigo_fuente):
     return principal()
 
 
-### PRUEBA PASER CON LEXER ###
 
-""" 
-PARSER
-ejemplo de derivacion: 
-SI ID EQUAL NUM PUNTO-COMA LEER ID PUNTO-COMA FUNC ID Parentensis Abierto ID PUNTO-COMA Parentensis Cerrado SI NUM OPEREL NUM ENTONCES ID PUNTO-COMA SINO ID PUNTO-COMA FIN-SI REPETIR ID EQUAL NUM PUNTO-COMA LEER ID PUNTO-COMA MOSTRAR ID PUNTO-COMA HASTA NUM PUNTO-COMA FINFUNC
-
-cadena resultante: 
-SI A = 8 ; LEER B ; FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC
-
-##############################################
-Lexer Devuelve ante esa cadena de arriba 
-[
-    ('ID', 'SI'),
-    ('ID', 'A'),
-    ('OPEREL', '='),
-    ('NUM', '8'),
-    ('PUNTO-COMA', ';'),
-    ('ID', 'LEER'),
-    ('ID', 'B'),
-    ('PUNTO-COMA', ';'),
-    ('ID', 'FUNC'),
-    ('ID', 'C'),
-    ('Parentensis Abierto',
-    '('), ('ID', 'D'),
-    ('PUNTO-COMA', ';'),
-    ('Parentensis Cerrado', ')'),
-    ('ID', 'SI'),
-    ('NUM', '8'),
-    ('OPEREL', '>'),
-    ('NUM', '7'),
-    ('ID', 'ENTONCES'),
-    ('ID', 'E'),
-    ('PUNTO-COMA', ';'),
-    ('ID', 'SINO'),
-    ('ID', 'F'),
-    ('PUNTO-COMA', ';'),
-    ('ID', 'FIN'),
-    ('OPSUM', '-'),
-    ('ID', 'SI'),
-    ('ID', 'REPETIR'),
-    ('ID', 'G'),
-    ('OPEREL', '='),
-    ('NUM', '9'),
-    ('PUNTO-COMA', ';'),
-    ('ID', 'LEER'),
-    ('ID', 'H'),
-    ('PUNTO-COMA', ';'),
-    ('ID', 'MOSTRAR'),
-    ('ID', 'L'),
-    ('PUNTO-COMA', ';'),
-    ('ID', 'HASTA'),
-    ('NUM', '8'),
-    ('PUNTO-COMA', ';'),
-    ('ID', 'FIN'),
-    ('OPSUM', '-'),
-    ('ID', 'FUNC')
-]
-
-
-"""
-codigo_fuente = "SI A = 8 ; LEER B ; FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC"
-print(parser(lexer(codigo_fuente)))
+codigo_fuente = "si x<10 entonces mostrar x finsi" # FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC"
+w = lexer(codigo_fuente)
+print(parser(w))

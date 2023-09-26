@@ -7,7 +7,7 @@ VN = ['Program', 'ListaSentencias', 'Sentencia', 'SentenciaSi',
 
 VT = ["SI","FINSI","OPSUM","OPMULT","EQUAL","LEER","MOSTRAR","REPETIR",
               "HASTA","ENTONCES","MIENTRAS","FUNC","FINFUNC","OPEREL","PUNTO-COMA",
-              "Parentensis Cerrado","Parentensis Abierto","NUM","ID"]
+              "Parentensis Cerrado","Parentensis Abierto","NUM","ID","#"]
 
 dicSD = { 'Program':{"SI":['ListaSentencias'],
                 "REPETIR":['ListaSentencias'],
@@ -23,9 +23,8 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
                 "MOSTRAR":['Sentencia' ,'ListaSentencia2'],
                 "FUNC":['Sentencia' ,'ListaSentencia2']},
 
-    'ListaSentencia2':{"PUNTO-COMA":['PUNTO-COMA','Sentencia','ListaSentencia2']},
-                       
-    'ListaSentencia2':{"FIN-FUNC":[],
+    'ListaSentencia2':{"PUNTO-COMA":['PUNTO-COMA','Sentencia','ListaSentencia2'],
+                       "FIN-FUNC":[],
                        "FIN-SI":[],
                        "SINO":[],
                        "HASTA":[]},
@@ -54,9 +53,10 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
 
     'Proc':{"ID": ['ID', 'Parentensis Abierto' , 'ListaPar' , 'Parentensis Cerrado','ListaSentencias']},
 
-    'ListaPar':{"ID":['ID','ListaPar2'],
-                "PUNTO-COMA":['PUNTO-COMA', 'ID', 'ListaPar2'],
-                "Parentesis Cerrado":[]},
+    'ListaPar':{"ID":['ID','ListaPar2']},
+
+    'ListaPar2':{"PUNTO-COMA": ['PUNTO-COMA', 'ID', 'ListaPar2'],
+                 "Parentesis Cerrado": []},
 
     'Expression':{"Parentesis Abierto":['Expresion2', 'ExpressionPrima'],
                  "NUM":['Expresion2', 'ExpressionPrima'],
@@ -93,8 +93,8 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
                 "NUM":  ['Factor', 'Termino2' ], 
                 "ID":  ['Factor', 'Termino2' ] }, 
 
-    'Termino2': {"OPTMULT" : ['OPTMULT', 'Factor', 'Termino2']},
-    'Termino2':{"#":[],
+    'Termino2': {"OPTMULT" : ['OPTMULT', 'Factor', 'Termino2'],
+                "#":[],
                 "OPTSUMA" : [],
                 "PUNTO-COMA": [],
                 "OPEREL":[],
@@ -102,10 +102,12 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
                 "FIN-SI": [],
                 "SINO" : [],
                 "HASTA" : [],
-                "ENTONCES":[]},
+                "ENTONCES":[],
+                "Parentesis Cerrado":[]},
     
-    'Factor':{"Parentesis Abierto" : ['Parentesis Abierto',"Expression","Parentesis Cerrado"]},
-    'Factor':{"NUM" : ['NUM']},
-    'Factor':{"ID": ['ID']}
+    'Factor':{"Parentesis Abierto" : ['Parentesis Abierto',"Expression","Parentesis Cerrado"],
+              "NUM" : ['NUM'],
+              "ID": ['ID']}
 }
+
                 
