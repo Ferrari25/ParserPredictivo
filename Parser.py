@@ -72,25 +72,63 @@ def parser(codigo_fuente):
 ### PRUEBA PASER CON LEXER ###
 
 """ 
-LEXER
-cadena = 2 + 2 cadena ( if func )
-
-el lexer devuelve 
-
-[
-    ('NUM', '2'), 
-    ('OPSUM', '+'),
-    ('NUM', '2'),
-    ('ID', 'cadena'),
-    ('Parentensis Abierto', '('),
-    ('ID', 'if'),
-    ('FUNC', 'func'),
-    ('Parentensis Cerrado', ')')
-]
-##############################################
 PARSER
+ejemplo de derivacion: 
 SI ID EQUAL NUM PUNTO-COMA LEER ID PUNTO-COMA FUNC ID Parentensis Abierto ID PUNTO-COMA Parentensis Cerrado SI NUM OPEREL NUM ENTONCES ID PUNTO-COMA SINO ID PUNTO-COMA FIN-SI REPETIR ID EQUAL NUM PUNTO-COMA LEER ID PUNTO-COMA MOSTRAR ID PUNTO-COMA HASTA NUM PUNTO-COMA FINFUNC
+
+cadena resultante: 
 SI A = 8 ; LEER B ; FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC
+
+##############################################
+Lexer Devuelve ante esa cadena de arriba 
+[
+    ('ID', 'SI'),
+    ('ID', 'A'),
+    ('OPEREL', '='),
+    ('NUM', '8'),
+    ('PUNTO-COMA', ';'),
+    ('ID', 'LEER'),
+    ('ID', 'B'),
+    ('PUNTO-COMA', ';'),
+    ('ID', 'FUNC'),
+    ('ID', 'C'),
+    ('Parentensis Abierto',
+    '('), ('ID', 'D'),
+    ('PUNTO-COMA', ';'),
+    ('Parentensis Cerrado', ')'),
+    ('ID', 'SI'),
+    ('NUM', '8'),
+    ('OPEREL', '>'),
+    ('NUM', '7'),
+    ('ID', 'ENTONCES'),
+    ('ID', 'E'),
+    ('PUNTO-COMA', ';'),
+    ('ID', 'SINO'),
+    ('ID', 'F'),
+    ('PUNTO-COMA', ';'),
+    ('ID', 'FIN'),
+    ('OPSUM', '-'),
+    ('ID', 'SI'),
+    ('ID', 'REPETIR'),
+    ('ID', 'G'),
+    ('OPEREL', '='),
+    ('NUM', '9'),
+    ('PUNTO-COMA', ';'),
+    ('ID', 'LEER'),
+    ('ID', 'H'),
+    ('PUNTO-COMA', ';'),
+    ('ID', 'MOSTRAR'),
+    ('ID', 'L'),
+    ('PUNTO-COMA', ';'),
+    ('ID', 'HASTA'),
+    ('NUM', '8'),
+    ('PUNTO-COMA', ';'),
+    ('ID', 'FIN'),
+    ('OPSUM', '-'),
+    ('ID', 'FUNC')
+]
+
+
 """
-codigo_fuente = ""
+codigo_fuente = "SI A = 8 ; LEER B ; FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC"
 print(parser(lexer(codigo_fuente)))

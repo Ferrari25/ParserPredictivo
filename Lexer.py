@@ -75,5 +75,5 @@ TOKENS_POSIBLES = [("SI", automata_si),
                    ("NUM",automata_num),
                     ("ID", automata_id)]
 
-codigo_fuente = "2 + 2 cadena ( SI FUNC )"
+codigo_fuente = "SI A = 8 ; LEER B ; FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC"
 print(lexer(codigo_fuente))
