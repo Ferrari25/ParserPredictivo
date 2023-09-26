@@ -2,6 +2,8 @@ VN = ['S']
 
 VT = ['Token(','Token)']
 
+### ES LA GRAMATICA DE BALANCEO DE PARENTESIS, MISMA CANT DE '(' QUE DE ')'
+
 P = { 'S': [['Token(','S','Token)','S'],
             ['Token(','Token)','S'],
             ['Token(','S','Token)'],
@@ -63,4 +65,8 @@ def desc_rec_proc(codigo_fuente):
     
     return principal()
 
-print(desc_rec_proc(lex('(())')))
+codigo_fuente_funciona = "((()))"
+codigo_fuente_error = "())))"
+
+print(desc_rec_proc(lex(codigo_fuente_funciona)))
+print(desc_rec_proc(lex(codigo_fuente_error)))
