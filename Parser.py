@@ -1,28 +1,49 @@
-
-from Gramatica import *           #trae producciones, VT, VN
+from Gramatica import *           
 from Lexer import * 
 from Automatas import * 
 
-def desc_rec_proc(codigo_fuente):
+
+
+def parser(codigo_fuente):
     datos_locales = {
         'lista_tokens': codigo_fuente,
         'index': 0,
         'error': False,
     }   
           
+    #INTENTO DE PNI GENERAL PREDICTIVO        
     def pni(no_terminal):
-        for cuerpo_produccion in P[no_terminal]:
-            backtracking_index = datos_locales['index']
-            procesar(cuerpo_produccion)
-            if datos_locales['error']:
-                datos_locales['index'] = backtracking_index
-            else:
-                break
+        caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]
+        if caracter_actual in SD[no_terminal].keys():
+            lado_derecho= SD[no_terminal][caracter_actual]
+            for lado_derecho in SD[no_terminal]:
+                procesar(lado_derecho)
     
+    
+    ############## NOTAS PNI GENERICO ####################
+    """
+    LADO_DERECHO
+    lado_derecho guarda las producciones que se puede usar dado un no-terminal
+    ej: si el no-Terminal es 'ListaSentencias' y el caracter actual (lo q se esta aputando) es "ID"
+    entonce lado_derecho almacenara la produccion "['Sentencia' ,'ListaSentencia2']"
+    ya que la definición de la gramática indica que 'ListaSentencias' puede derivar en 'Sentencia' ,'ListaSentencia2' cuando el símbolo actual es "ID".
+    
+    
+    CARACTER_ACTUAL
+    caracter_actual en tu código se refiere al símbolo actual que se está analizando en la lista de tokens.
+    Este símbolo se extrae de la lista de tokens en función del valor del índice actual 
+    
+    SD[NO_TERMINAL].KEYS()
+    es una lista de los simbolos directrices para el no terminal que se esta recorriendo 
+    
+    
+    """
+    ##########################################
+                    
+
     def procesar(cuerpo_produccion):
         for simbolo in cuerpo_produccion:
             caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]
-            #lexema_actual = datos_locales['lista_tokens'][datos_locales['index']][1]
             datos_locales['error'] = False
             if simbolo in VT:
                 if simbolo == caracter_actual:
@@ -37,7 +58,7 @@ def desc_rec_proc(codigo_fuente):
                 
     
     def principal():
-        pni('S')
+        pni('Program')
         caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]
         if caracter_actual != 'Eof' or datos_locales['error']:
             print('La cadena no pertenece al lenguaje')
@@ -47,3 +68,29 @@ def desc_rec_proc(codigo_fuente):
     
     return principal()
 
+
+### PRUEBA PASER CON LEXER ###
+
+""" 
+LEXER
+cadena = 2 + 2 cadena ( if func )
+
+el lexer devuelve 
+
+[
+    ('NUM', '2'), 
+    ('OPSUM', '+'),
+    ('NUM', '2'),
+    ('ID', 'cadena'),
+    ('Parentensis Abierto', '('),
+    ('ID', 'if'),
+    ('FUNC', 'func'),
+    ('Parentensis Cerrado', ')')
+]
+##############################################
+PARSER
+SI ID EQUAL NUM PUNTO-COMA LEER ID PUNTO-COMA FUNC ID Parentensis Abierto ID PUNTO-COMA Parentensis Cerrado SI NUM OPEREL NUM ENTONCES ID PUNTO-COMA SINO ID PUNTO-COMA FIN-SI REPETIR ID EQUAL NUM PUNTO-COMA LEER ID PUNTO-COMA MOSTRAR ID PUNTO-COMA HASTA NUM PUNTO-COMA FINFUNC
+SI A = 8 ; LEER B ; FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC
+"""
+codigo_fuente = ""
+print(parser(lexer(codigo_fuente)))

@@ -74,3 +74,6 @@ TOKENS_POSIBLES = [("SI", automata_si),
                    ("Parentensis Abierto",automataParenOpen),
                    ("NUM",automata_num),
                     ("ID", automata_id)]
+
+codigo_fuente = "2 + 2 cadena ( SI FUNC )"
+print(lexer(codigo_fuente))
