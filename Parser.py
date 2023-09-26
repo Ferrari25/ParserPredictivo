@@ -17,23 +17,28 @@ def parser(codigo_fuente):
     #INTENTO DE PNI GENERAL PREDICTIVO        
     def pni(no_terminal):
         datos_locales['error']=False
-        caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]
+        caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0] #PUNTERO
         if caracter_actual in dicSD[no_terminal]:
             lado_derecho= dicSD[no_terminal][caracter_actual]
             procesar(lado_derecho)
         else:
             datos_locales['error']=True
+            print(caracter_actual)
+            print(no_terminal)
                     
 
     def procesar(cuerpo_produccion):
         for simbolo in cuerpo_produccion:
-            caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]
+            caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0] #PUNTERO
             datos_locales['error'] = False
             if simbolo in VT:
                 if simbolo == caracter_actual:
-                    datos_locales['index'] += 1                        
+                    datos_locales['index'] += 1   #AVANZA PUNTERO                     
                 else:
-                    datos_locales['error'] = True
+                    datos_locales['error'] = True #ERROR ESTA EN TRUE
+                    print(caracter_actual)
+                    print(simbolo)
+                    print(cuerpo_produccion)
             elif simbolo in VN:
                 pni(simbolo)
                 if datos_locales['error']:
@@ -53,6 +58,7 @@ def parser(codigo_fuente):
 
 
 
-codigo_fuente = "si x<10 entonces mostrar x finsi" # FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC"
+codigo_fuente = "mostrar x+5" # FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC"
 w = lexer(codigo_fuente)
+print(w)
 print(parser(w))

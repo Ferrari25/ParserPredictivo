@@ -1,6 +1,6 @@
 VN = ['Program', 'ListaSentencias', 'Sentencia', 'SentenciaSi',
                     'SentenciaRepetir', 'SentenciaAsig', 'SentenciaLeer', 'SentenciaMostrar',
-                    'SentenciaFun','Proc', 'ListaPar', 'Expression', 'Expresion2', 'Factor',
+                    'SentenciaFun','Proc', 'ListaPar', 'Expresion', 'Expresion2', 'Factor',
                     'Termino','ListaSentencias2','ListaPar2','Expresion2','Termino2'
                 ]
 
@@ -16,18 +16,19 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
                 "MOSTRAR":['ListaSentencias'],
                 "FUNC":['ListaSentencias']},
 
-    'ListaSentencias':{"SI":['Sentencia' ,'ListaSentencia2'],
-                "REPETIR":['Sentencia', 'ListaSentencia2'],
-                "ID":['Sentencia', 'ListaSentencia2'],
-                "LEER":['Sentencia', 'ListaSentencia2'],
-                "MOSTRAR":['Sentencia' ,'ListaSentencia2'],
-                "FUNC":['Sentencia' ,'ListaSentencia2']},
+    'ListaSentencias':{"SI":['Sentencia' ,'ListaSentencias2'],
+                "REPETIR":['Sentencia', 'ListaSentencias2'],
+                "ID":['Sentencia', 'ListaSentencias2'],
+                "LEER":['Sentencia', 'ListaSentencias2'],
+                "MOSTRAR":['Sentencia' ,'ListaSentencias2'],
+                "FUNC":['Sentencia' ,'ListaSentencias2']},
 
-    'ListaSentencia2':{"PUNTO-COMA":['PUNTO-COMA','Sentencia','ListaSentencia2'],
+    'ListaSentencias2':{"PUNTO-COMA":['PUNTO-COMA','Sentencia','ListaSentencias2'],
                        "FIN-FUNC":[],
                        "FIN-SI":[],
                        "SINO":[],
-                       "HASTA":[]},
+                       "HASTA":[],
+                       "#":[]},
 
     'Sentencia':{"SI":['SentenciaSi'],
                  "REPETIR":['SentenciaRepetir'],
@@ -36,18 +37,18 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
                 "MOSTRAR":['SentenciaMostrar'],
                 "FUNC":['SentenciaFun']},
 
-    'SentenciaRepetir':{"REPETIR":['REPETIR','ListaSentencias','HASTA','Expression']},
+    'SentenciaRepetir':{"REPETIR":['REPETIR','ListaSentencias','HASTA','Expresion']},
 
-    'SentenciaSi':{"SI":['SI','Expression','ENTONCES','ListaSentencias','SentenciaSi2']},
+    'SentenciaSi':{"SI":['SI','Expresion','ENTONCES','ListaSentencias','SentenciaSi2']},
 
-    'SentenciaSi2':{"SINO":['SINO','ListaSentencia','FIN-SI'],
+    'SentenciaSi2':{"SINO":['SINO','ListaSentencias','FIN-SI'],
                     "FIN-SI":['FIN-SI']},
 
-    'SentenciaAsig':{"ID":['ID', 'EQUAL' ,'Expression']},
+    'SentenciaAsig':{"ID":['ID', 'EQUAL' ,'Expresion']},
 
     'SentenciaLeer':{"LEER":['LEER', 'ID']},
 
-    'SentenciaMostrar':{"MOSTRAR":['MOSTRAR', 'Expression']},
+    'SentenciaMostrar':{"MOSTRAR":['MOSTRAR', 'Expresion']},
 
     'SentenciaFun':{"FUNC": ['FUNC', 'Proc', 'FINFUNC'] },
 
@@ -58,12 +59,12 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
     'ListaPar2':{"PUNTO-COMA": ['PUNTO-COMA', 'ID', 'ListaPar2'],
                  "Parentesis Cerrado": []},
 
-    'Expression':{"Parentesis Abierto":['Expresion2', 'ExpressionPrima'],
-                 "NUM":['Expresion2', 'ExpressionPrima'],
-                 "ID":['Expresion2', 'ExpressionPrima'],
+    'Expresion':{"Parentesis Abierto":['Expresion2', 'ExpresionPrima'],
+                 "NUM":['Expresion2', 'ExpresionPrima'],
+                 "ID":['Expresion2', 'ExpresionPrima'],
                  },
 
-    'ExpresionPrima':{"OPEREL":['OPEREL','Expression2'],
+    'ExpresionPrima':{"OPEREL":['OPEREL','Expresion2'],
                       "Parentesis Cerrado":[],
                       "#":[ ],
                       "PUNTO-COMA":[ ],
@@ -75,10 +76,10 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
                       },
 
     'Expresion2':{"Parentesis Abierto":['Termino','Expresion22'],
-                  "NUM":['Termino','Expresion2'],
-                  "ID": ['Termino','Expresion2']}, 
+                  "NUM":['Termino','Expresion22'],
+                  "ID": ['Termino','Expresion22']}, 
 
-    'Expresion22':{"OPSUM":[ 'OPSUMA','Termino' ,'Expresion22'],
+    'Expresion22':{"OPSUM":[ 'OPSUM','Termino' ,'Expresion22'],
                     "Parentesis Cerrado": [],
                     "#":[ ], 
                     "PUNTO-COMA": [ ],
@@ -93,9 +94,9 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
                 "NUM":  ['Factor', 'Termino2' ], 
                 "ID":  ['Factor', 'Termino2' ] }, 
 
-    'Termino2': {"OPTMULT" : ['OPTMULT', 'Factor', 'Termino2'],
+    'Termino2': {"OPMULT" : ['OPMULT', 'Factor', 'Termino2'],
                 "#":[],
-                "OPTSUMA" : [],
+                "OPSUM" : [],
                 "PUNTO-COMA": [],
                 "OPEREL":[],
                 "FIN-FUNC":[],
@@ -105,9 +106,10 @@ dicSD = { 'Program':{"SI":['ListaSentencias'],
                 "ENTONCES":[],
                 "Parentesis Cerrado":[]},
     
-    'Factor':{"Parentesis Abierto" : ['Parentesis Abierto',"Expression","Parentesis Cerrado"],
+    'Factor':{"Parentesis Abierto" : ['Parentesis Abierto',"Expresion","Parentesis Cerrado"],
               "NUM" : ['NUM'],
               "ID": ['ID']}
 }
 
                 
+
