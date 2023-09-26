@@ -10,6 +10,8 @@ def parser(codigo_fuente):
         'index': 0,
         'error': False,
     }   
+    
+    
           
     #INTENTO DE PNI GENERAL PREDICTIVO        
     def pni(no_terminal):
@@ -36,7 +38,21 @@ def parser(codigo_fuente):
     SD[NO_TERMINAL].KEYS()
     es una lista de los simbolos directrices para el no terminal que se esta recorriendo 
     
+    DICCIONARIO 
+    NOMBRE_DICCIONARIO :{NO_TERMINAL {KEY, [VALUE]} }
+    ej: SD:{ 'Program':{"SI":['ListaSentencias']}
+    key se obtiene con la funcion .key() 
+    value se obtiene con la funcion .get()
     
+    ---IDEA DEL PNI (NO-TERMINAL)---
+    TENGO UN PUNTERO A LA CADENA 
+    
+    SI A LO QUE APUNTO EN LA CADENA EXISTE EN LOS SIMBOLOS DIRECTRICES DE MI NO TERMINAL 
+    ej w= SI A = 8 ; ==> SI ID EQUAL NUM PUNTO-COMA
+    
+    
+    OBTENGO CON QUE PRODUCCIONES TENGO ESE SIMBOLO DIRECTRIZ 
+    LUEGO ESAS PRODUCCION QUE OBTENGO, SE LAS MANDO A PROCESAR 
     """
     ##########################################
                     
