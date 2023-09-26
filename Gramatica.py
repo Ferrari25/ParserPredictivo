@@ -114,10 +114,10 @@ SD(Factor -> ID) = {ID}
 """
 
 
-for clave in SD['Program']:  
+"""for clave in SD['Program']:  
     if clave== datos_locales['index']: 
         for cuerpo_produccion in SD['Program'.get(clave)]: 
-            Procesar(cuerpo_produccion,clave)
+            Procesar(cuerpo_produccion,clave)"""
 
 
 

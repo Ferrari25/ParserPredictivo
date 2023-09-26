@@ -1,26 +1,7 @@
 
 from Gramatica import *           #trae producciones, VT, VN
-
-VN = ['S']
-
-VT = ['Token(','Token)']
-
-P = { 'S': [['Token(','S','Token)','S'],
-            ['Token(','Token)','S'],
-            ['Token(','S','Token)'],
-            ['Token(','Token)']] }
-
-def lex(codigo_fuente):
-    lista_tokens=[]
-    for i in codigo_fuente:
-        if i=='(':
-            lista_tokens.append(('Token(','('))
-        elif i==')':
-            lista_tokens.append(('Token)',')'))
-        else:
-            return []
-    lista_tokens.append(('Eof','Eof'))
-    return lista_tokens
+from Lexer import * 
+from Automatas import * 
 
 def desc_rec_proc(codigo_fuente):
     datos_locales = {
@@ -66,4 +47,3 @@ def desc_rec_proc(codigo_fuente):
     
     return principal()
 
-print(desc_rec_proc(lex('(())')))
