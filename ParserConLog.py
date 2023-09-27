@@ -9,13 +9,13 @@ logging.basicConfig(
     level=logging.DEBUG,         # Nivel mínimo de registro (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     format='%(asctime)s - %(levelname)s - %(message)s'  # Formato del registro con marca de tiempo y nivel
 )
-logging.info("####")
-logging.info("####")
-logging.info("####")
-logging.info("####")
-logging.info("####")
-logging.info("####")
-logging.info("######################################### COMIENZO DE EJECUCION #######################################################")
+logging.debug("####")
+logging.debug("####")
+logging.debug("####")
+logging.debug("####")
+logging.debug("####")
+logging.debug("####")
+logging.debug("######################################### COMIENZO DE EJECUCION #######################################################")
 
 def parser(codigo_fuente):
     codigo_fuente.append(("#", "#"))
@@ -27,7 +27,7 @@ def parser(codigo_fuente):
 
     # Intento de PNI general predictivo
     def pni(no_terminal):
-        logging.info("----FUNCION PNI")
+        logging.debug("----FUNCION PNI")
         logging.debug("----NO TERMINAL EN PNI")
         logging.debug(no_terminal)
         
@@ -47,7 +47,7 @@ def parser(codigo_fuente):
             logging.error(f'Error en pni: No se encontro {caracter_actual} en {no_terminal}')
 
     def procesar(cuerpo_produccion):
-        logging.info("----FUNCION PROCESAR")
+        logging.debug("----FUNCION PROCESAR")
         logging.debug("----CUERPO DE PRODUCCION EN PROCESAR")
         logging.debug(cuerpo_produccion)
         for simbolo in cuerpo_produccion:
@@ -61,7 +61,7 @@ def parser(codigo_fuente):
                     logging.debug("---- SIMBOLO == CARACTER ACTUAL")
                     logging.debug(caracter_actual)
                     datos_locales['index'] += 1  
-                    logging.info("El puntero avanzo")
+                    logging.debug("El puntero avanzo")
                 else:
                     datos_locales['error'] = True
                     logging.error(f'Error en procesar: Se esperaba {simbolo}, se encontró {caracter_actual}')
@@ -75,15 +75,15 @@ def parser(codigo_fuente):
                     break
 
     def principal():
-        logging.info("----FUNCION PRINCIPAL")
+        logging.debug("----FUNCION PRINCIPAL")
         pni('Program')
         caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]
         if caracter_actual != '#' or datos_locales['error']:
             logging.error('La cadena no pertenece al lenguaje')
-            logging.info("######################################### NO - PERTENECE #######################################################")
+            logging.debug("######################################### NO - PERTENECE #######################################################")
             return False
-        logging.info('La cadena pertenece al lenguaje')
-        logging.info("######################################### PERTENECE #######################################################")
+        logging.debug('La cadena pertenece al lenguaje')
+        logging.debug("######################################### PERTENECE #######################################################")
         return True
 
     return principal()
