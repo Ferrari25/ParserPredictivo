@@ -58,7 +58,7 @@ def parser(codigo_fuente):
 
 
 
-codigo_fuente = "mostrar x+5" # FUNC C ( D ; ) SI 8 > 7 ENTONCES E ; SINO F ; FIN-SI REPETIR G = 9 ; LEER H ; MOSTRAR L ; HASTA 8 ; FIN-FUNC"
+codigo_fuente = "mostrar x + 5" 
 w = lexer(codigo_fuente)
 print(w)
 print(parser(w))
