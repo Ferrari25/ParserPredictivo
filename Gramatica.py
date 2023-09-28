@@ -1,7 +1,7 @@
 VN = ['Program', 'ListaSentencias', 'Sentencia', 'SentenciaSi',
                     'SentenciaRepetir', 'SentenciaAsig', 'SentenciaLeer', 'SentenciaMostrar',
                     'SentenciaFun','Proc', 'ListaPar', 'Expresion', 'Expresion2', 'Factor',
-                    'Termino','ListaSentencias2','ListaPar2','Expresion2','Termino2'
+                    'Termino','ListaSentencias2','ListaPar2','Expresion22','Termino2'
                 ]
 
 
