@@ -49,7 +49,40 @@ def parser(codigo_fuente):
 
 
 
-codigo_fuente = "mostrar x + 5" 
-w = lexer(codigo_fuente)
-print(w)
-print(parser(w))
+#Cadenas que el lenguaje  debe aceptar:
+w1= "mostrar x + 5"
+w2= "func hello(x) hello equal 1234; mostrar hello finfunc"
+w3= ""
+w4= ""
+w5= ""
+w6= ""
+
+#Cadenas que el lenguaje no debe aceptar:
+w7= "si x > 5 entonces si"
+w8= ""
+w9= ""
+w10= ""
+
+print("w1")
+print(parser(lexer(w1)))
+print("w2")
+print(parser(lexer(w2)))
+print("w3")
+print(parser(lexer(w3)))
+print("w4")
+print(parser(lexer(w4)))
+print("w5")
+print(parser(lexer(w5)))
+print("w6")
+print(parser(lexer(w6)))
+print("w7")
+print(parser(lexer(w7)))
+print("w8")
+print(parser(lexer(w8)))
+print("w9")
+print(parser(lexer(w9)))
+print("w10")
+print(parser(lexer(w10)))
+
+
+
