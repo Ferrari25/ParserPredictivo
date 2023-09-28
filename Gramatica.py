@@ -9,7 +9,7 @@ VT = ["SI","FINSI","OPSUM","OPMULT","EQUAL","LEER","MOSTRAR","REPETIR",
               "HASTA","ENTONCES","MIENTRAS","FUNC","FINFUNC","OPEREL","PUNTO-COMA",
               "Parentensis Cerrado","Parentensis Abierto","NUM","ID","#"]
 
-dicSD = { 'Program':{"SI":['ListaSentencias'],
+P = { 'Program':{"SI":['ListaSentencias'],
                 "REPETIR":['ListaSentencias'],
                 "ID":['ListaSentencias'],
                 "LEER":['ListaSentencias'],
