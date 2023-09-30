@@ -1,40 +1,49 @@
 VN = ['Program', 
-      'ListaSentencias','ListaSentencias_prima',
+      'ListaSentencias',
+      'ListaSentencias_prima',
       'Sentencia',
-      'SentenciaSi','SentenciaSi_prima',
+      'SentenciaSi',
+      'SentenciaSi_prima',
       'SentenciaRepetir',
       'SentenciaAsig',
       'SentenciaLeer',
       'SentenciaMostrar',
+      'SentenciaFun'
       'Proc',
-      'ListaPar','ListaPar_prima',
-      'Expresion','Expresion_prima',
-      'Expresion2','Expresion2_prima',
+      'ListaPar',
+      'ListaPar_prima',
+      'Expresion',
+      'Expresion_prima',
+      'Expresion2',
+      'Expresion2_prima',
+      'Termino',
+      'Termino_prima',
       'Factor',
-      'Termino','Termino_prima',
-                ]
+     ]
 
 
-VT = ["SI",
-      "FINSI",
-      "OPSUM",
-      "OPMULT",
+VT = ["Parentensis Cerrado",
+      "Parentensis Abierto",
+      "PUNTO-COMA",
+      "ENTONCES",
       "EQUAL",
+      "FINFUNC",
+      "FINSI",
+      "FUNC",
+      "HASTA",
       "LEER",
       "MOSTRAR",
       "REPETIR",
-      "HASTA",
-      "ENTONCES",
-      "MIENTRAS",
-      "FUNC",
-      "FINFUNC",
+      "SI",
+      "SINO"
       "OPREL",
-      "PUNTO-COMA",
-      "Parentensis Cerrado",
-      "Parentensis Abierto",
+      "OPMULT",
+      "OPSUMA",
+      "EQUAL",
+      "ENTONCES",
       "NUM",
       "ID",
-      "#"]
+      "#",]
 
 P = {
     "Program": {
@@ -108,7 +117,7 @@ P = {
     "ListaPar": {"ID": ["ID", "ListaPar_prima"],},
 
     "ListaPar_prima": {
-        "PUNTO-COMA": ["PUNTO-COMA", "ID", "ListaPar_prima"],
+        "PUNTO-COMA":           ["PUNTO-COMA", "ID", "ListaPar_prima"],
         "Parentesis Cerrado":   [],},
 
     "Expresion": {
@@ -118,15 +127,15 @@ P = {
     },
 
     "Expresion_prima": {
-        "OPREL":      ["OPREL", "Expresion2"],
+        "OPREL":                ["OPREL", "Expresion2"],
         "Parentesis Cerrado":   [],
-        "#":          [],
-        "PUNTO-COMA": [],
-        "FINFUNC":    [],
-        "FINSI":      [],
-        "SINO":       [],
-        "HASTA":      [],
-        "ENTONCES":   [],
+        "#":                    [],
+        "PUNTO-COMA":           [],
+        "FINFUNC":              [],
+        "FINSI":                [],
+        "SINO":                 [],
+        "HASTA":                [],
+        "ENTONCES":             [],
     },
 
     "Expresion2": {
@@ -136,16 +145,16 @@ P = {
     },
 
     "Expresion2_prima": {
-        "OPSUM":     ["OPSUM", "Termino", "Expresion2_prima"],
-        "OPREL":     [],
+        "OPSUMA":               ["OPSUMA", "Termino", "Expresion2_prima"],
+        "OPREL":                [],
         "Parentesis Cerrado":   [],
-        "#":          [],
-        "PUNTO-COMA": [],
-        "FINFUNC":    [],
-        "FINSI":      [],
-        "SINO":       [],
-        "HASTA":      [],
-        "ENTONCES":   [],
+        "#":                    [],
+        "PUNTO-COMA":           [],
+        "FINFUNC":              [],
+        "FINSI":                [],
+        "SINO":                 [],
+        "HASTA":                [],
+        "ENTONCES":             [],
     },
 
     "Termino": {
@@ -155,8 +164,8 @@ P = {
     },
 
     "Termino_prima": {
-        "OPMULT":    ["OPMULT", "Factor", "Termino_prima"],
-        "OPSUM":              [],
+        "OPMULT":              ["OPMULT", "Factor", "Termino_prima"],
+        "OPSUMA":              [],
         "OPREL":               [],
         "Parentesis Cerrado":  [],
         "#":                   [],
@@ -169,7 +178,7 @@ P = {
     },
 
     "Factor": {
-        "Parentesis Cerrado": ["Parentesis Abierto", "Expresion", "Parentesis Cerrado"],
+        "Parentesis Abierto": ["Parentesis Abierto", "Expresion", "Parentesis Cerrado"],
         "NUM":                ["NUM"],
         "ID":                 ["ID"]
     }
