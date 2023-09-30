@@ -2,20 +2,16 @@ from Automatas import *
 
 #Lexer
 def lexer(codigo_fuente): 
-    #codigo_fuente=codigo_fuente +" " #nose porque, pero sin esto se rompe 
-    tokens = [] #es la lista donde estara el token devuelto por el lexer 
-    posicion_actual = 0 #inicializa la posicion actual 
+    tokens = [] 
+    posicion_actual = 0 
     
-    while posicion_actual < len(codigo_fuente): #es un ciclo que hara una secuencia mientras la posicion actual sea menor a la long de la cadena de entrada
-        
-        #es un ciclo que pregunta si la posicion donde apunta, es una espacio vacio, aumenta en 1 la posicion actual para continuar con la cadena
+    while posicion_actual < len(codigo_fuente):
+
         while codigo_fuente[posicion_actual].isspace(): 
             posicion_actual = posicion_actual + 1 
-        
-        #declara a comienzo_lexema igual a la posicion_actual   
+
         comienzo_lexema = posicion_actual 
-        
-        #inicializa variables 
+
         posibles_tokens = [] 
         posibles_tokens_con_un_caracter_mas = [] 
         lexema = "" 
@@ -28,11 +24,7 @@ def lexer(codigo_fuente):
             posibles_tokens = posibles_tokens_con_un_caracter_mas
             posibles_tokens_con_un_caracter_mas = []
             
-            
-            # Revisa cada tupla de tokens en TOKENS_POSIBLES,
-            # Realiza una simulacion del token,
-                # Si ese token termina en estado final, lo añande a  posibles_tokens_con_un_caracter_mas y dice que no todos los token estan en estado trampa para seguir revisando los demas tokens 
-                # Si ese token no termina en estado final, dice que no todos los token estan en estado trampa
+
             for (un_tipo_de_token, afd) in TOKENS_POSIBLES: 
                 simulacion_afd = afd(lexema) 
                 if simulacion_afd == ESTADO_FINAL: 
@@ -68,12 +60,12 @@ TOKENS_POSIBLES = [("SI", automata_si),
                    ("MIENTRAS", automata_mientras),
                    ("FUNC", automata_func),
                    ("FINFUNC", automata_finfunc),
-                   ("OPEREL", automata_oprel),
+                   ("OPREL", automata_oprel),
                    ("PUNTO-COMA",automataPuntoComa),
                    ("Parentensis Cerrado",automataParenClose),
                    ("Parentensis Abierto",automataParenOpen),
                    ("NUM",automata_num),
-                    ("ID", automata_id)]
+                   ("ID", automata_id)]
 
-##codigo_fuente1 = "si x<10 entonces mostrar x finsi"
-##print(lexer(codigo_fuente1))
+codigo_fuente1 = "si x<10 entonces mostrar x finsi"
+print(lexer(codigo_fuente1))

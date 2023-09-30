@@ -1,115 +1,176 @@
-VN = ['Program', 'ListaSentencias', 'Sentencia', 'SentenciaSi',
-                    'SentenciaRepetir', 'SentenciaAsig', 'SentenciaLeer', 'SentenciaMostrar',
-                    'SentenciaFun','Proc', 'ListaPar', 'Expresion', 'Expresion2', 'Factor',
-                    'Termino','ListaSentencias2','ListaPar2','Expresion22','Termino2'
+VN = ['Program', 
+      'ListaSentencias','ListaSentencias_prima',
+      'Sentencia',
+      'SentenciaSi','SentenciaSi_prima',
+      'SentenciaRepetir',
+      'SentenciaAsig',
+      'SentenciaLeer',
+      'SentenciaMostrar',
+      'Proc',
+      'ListaPar','ListaPar_prima',
+      'Expresion','Expresion_prima',
+      'Expresion2','Expresion2_prima',
+      'Factor',
+      'Termino','Termino_prima',
                 ]
 
 
-VT = ["SI","FINSI","OPSUM","OPMULT","EQUAL","LEER","MOSTRAR","REPETIR",
-              "HASTA","ENTONCES","MIENTRAS","FUNC","FINFUNC","OPEREL","PUNTO-COMA",
-              "Parentensis Cerrado","Parentensis Abierto","NUM","ID","#"]
+VT = ["SI",
+      "FINSI",
+      "OPSUM",
+      "OPMULT",
+      "EQUAL",
+      "LEER",
+      "MOSTRAR",
+      "REPETIR",
+      "HASTA",
+      "ENTONCES",
+      "MIENTRAS",
+      "FUNC",
+      "FINFUNC",
+      "OPREL",
+      "PUNTO-COMA",
+      "Parentensis Cerrado",
+      "Parentensis Abierto",
+      "NUM",
+      "ID",
+      "#"]
 
-P = { 'Program':{"SI":['ListaSentencias'],
-                "REPETIR":['ListaSentencias'],
-                "ID":['ListaSentencias'],
-                "LEER":['ListaSentencias'],
-                "MOSTRAR":['ListaSentencias'],
-                "FUNC":['ListaSentencias']},
+P = {
+    "Program": {
+        "SI":      ["ListaSentencias"],
+        "REPETIR": ["ListaSentencias"],
+        "ID":      ["ListaSentencias"],
+        "LEER":    ["ListaSentencias"],
+        "MOSTRAR": ["ListaSentencias"],
+        "FUNC":    ["ListaSentencias"],
 
-    'ListaSentencias':{"SI":['Sentencia' ,'ListaSentencias2'],
-                "REPETIR":['Sentencia', 'ListaSentencias2'],
-                "ID":['Sentencia', 'ListaSentencias2'],
-                "LEER":['Sentencia', 'ListaSentencias2'],
-                "MOSTRAR":['Sentencia' ,'ListaSentencias2'],
-                "FUNC":['Sentencia' ,'ListaSentencias2']},
+    },
 
-    'ListaSentencias2':{"PUNTO-COMA":['PUNTO-COMA','Sentencia','ListaSentencias2'],
-                       "FIN-FUNC":[],
-                       "FIN-SI":[],
-                       "SINO":[],
-                       "HASTA":[],
-                       "#":[]},
+    "ListaSentencias": {
+        "SI":      ["Sentencia", "ListaSentencias_prima"],
+        "REPETIR": ["Sentencia", "ListaSentencias_prima"],
+        "ID":      ["Sentencia", "ListaSentencias_prima"],
+        "LEER":    ["Sentencia", "ListaSentencias_prima"],
+        "MOSTRAR": ["Sentencia", "ListaSentencias_prima"],
+        "FUNC":    ["Sentencia", "ListaSentencias_prima"],
+    },
 
-    'Sentencia':{"SI":['SentenciaSi'],
-                 "REPETIR":['SentenciaRepetir'],
-                 "ID":['SentenciaAsig'],
-                 "LEER":['SentenciaLeer'],
-                "MOSTRAR":['SentenciaMostrar'],
-                "FUNC":['SentenciaFun']},
+    "ListaSentencias_prima": {
+        "PUNTO-COMA": ["PUNTO-COMA", "Sentencia", "ListaSentencias_prima"],
+        "#":          [],
+        "FINFUNC":    [],
+        "FINSI":      [],
+        "SINO":       [],
+        "HASTA":      [],
+    },
 
-    'SentenciaRepetir':{"REPETIR":['REPETIR','ListaSentencias','HASTA','Expresion']},
+    "Sentencia": {
+        "SI":      ["SentenciaSi"],
+        "REPETIR": ["SentenciaRepetir"],
+        "ID":      ["SentenciaAsig"],
+        "LEER":    ["SentenciaLeer"],
+        "MOSTRAR": ["SentenciaMostrar"],
+        "FUNC":    ["SentenciaFun"],
+    },
 
-    'SentenciaSi':{"SI":['SI','Expresion','ENTONCES','ListaSentencias','SentenciaSi2']},
+    "SentenciaRepetir": {
+        "REPETIR":  ["REPETIR", "ListaSentencias", "HASTA", "Expresion"],
+    },
 
-    'SentenciaSi2':{"SINO":['SINO','ListaSentencias','FIN-SI'],
-                    "FIN-SI":['FIN-SI']},
+    "SentenciaSi": {
+        "SI":  ["SI", "Expresion", "ENTONCES", "ListaSentencias","SentenciaSi_prima"],
+    },
 
-    'SentenciaAsig':{"ID":['ID', 'EQUAL' ,'Expresion']},
+    "SentenciaSi_prima": {
+        "SINO":  ["SINO", "ListaSentencias", "FINSI"],
+        "FINSI": ["FINSI"],
+    },
 
-    'SentenciaLeer':{"LEER":['LEER', 'ID']},
+    "SentenciaAsig": {
+        "ID": ["ID", "EQUAL", "Expresion"],
+    },
 
-    'SentenciaMostrar':{"MOSTRAR":['MOSTRAR', 'Expresion']},
+    "SentenciaLeer": {
+        "LEER": ["LEER", "ID"],
+    },
 
-    'SentenciaFun':{"FUNC": ['FUNC', 'Proc', 'FINFUNC'] },
+    "SentenciaMostrar": {
+        "MOSTRAR": ["MOSTRAR", "Expresion"],
+    },
 
-    'Proc':{"ID": ['ID', 'Parentensis Abierto' , 'ListaPar' , 'Parentensis Cerrado','ListaSentencias']},
+    "SentenciaFun": {"FUNC": ["FUNC", "Proc", "FINFUNC"],},
 
-    'ListaPar':{"ID":['ID','ListaPar2']},
+    "Proc": {
+        "ID": ["ID", "Parentesis Abierto", "ListaPar", "Parentesis Cerrado", "ListaSentencias"],
+    },
 
-    'ListaPar2':{"PUNTO-COMA": ['PUNTO-COMA', 'ID', 'ListaPar2'],
-                 "Parentesis Cerrado": []},
+    "ListaPar": {"ID": ["ID", "ListaPar_prima"],},
 
-    'Expresion':{"Parentesis Abierto":['Expresion2', 'ExpresionPrima'],
-                 "NUM":['Expresion2', 'ExpresionPrima'],
-                 "ID":['Expresion2', 'ExpresionPrima'],
-                 },
+    "ListaPar_prima": {
+        "PUNTO-COMA": ["PUNTO-COMA", "ID", "ListaPar_prima"],
+        "Parentesis Cerrado":   [],},
 
-    'ExpresionPrima':{"OPEREL":['OPEREL','Expresion2'],
-                      "Parentesis Cerrado":[],
-                      "#":[ ],
-                      "PUNTO-COMA":[ ],
-                      "FIN-FUNC":[ ],
-                      "FIN-SI":[ ],
-                      "SINO": [],
-                      "HASTA":[ ],
-                      "ENTONCES": [ ],
-                      },
+    "Expresion": {
+        "Parentesis Abierto": ["Expresion2", "Expresion_prima"],
+        "NUM":                ["Expresion2", "Expresion_prima"],
+        "ID":                 ["Expresion2", "Expresion_prima"],
+    },
 
-    'Expresion2':{"Parentesis Abierto":['Termino','Expresion22'],
-                  "NUM":['Termino','Expresion22'],
-                  "ID": ['Termino','Expresion22']}, 
+    "Expresion_prima": {
+        "OPREL":      ["OPREL", "Expresion2"],
+        "Parentesis Cerrado":   [],
+        "#":          [],
+        "PUNTO-COMA": [],
+        "FINFUNC":    [],
+        "FINSI":      [],
+        "SINO":       [],
+        "HASTA":      [],
+        "ENTONCES":   [],
+    },
 
-    'Expresion22':{"OPSUM":[ 'OPSUM','Termino' ,'Expresion22'],
-                    "Parentesis Cerrado": [],
-                    "#":[ ], 
-                    "PUNTO-COMA": [ ],
-                    "OPEREL":[],
-                    "FIN-FUNC": [ ],
-                    "FIN-SI": [ ],
-                    "SINO": [ ],
-                    "HASTA": [ ],
-                    "ENTONCES": [ ]}, 
+    "Expresion2": {
+        "Parentesis Abierto": ["Termino", "Expresion2_prima"],
+        "NUM":                ["Termino", "Expresion2_prima"],
+        "ID":                 ["Termino", "Expresion2_prima"],
+    },
 
-    'Termino': { "Parentesis Abierto": ['Factor', 'Termino2' ], 
-                "NUM":  ['Factor', 'Termino2' ], 
-                "ID":  ['Factor', 'Termino2' ] }, 
+    "Expresion2_prima": {
+        "OPSUM":     ["OPSUM", "Termino", "Expresion2_prima"],
+        "OPREL":     [],
+        "Parentesis Cerrado":   [],
+        "#":          [],
+        "PUNTO-COMA": [],
+        "FINFUNC":    [],
+        "FINSI":      [],
+        "SINO":       [],
+        "HASTA":      [],
+        "ENTONCES":   [],
+    },
 
-    'Termino2': {"OPMULT" : ['OPMULT', 'Factor', 'Termino2'],
-                "#":[],
-                "OPSUM" : [],
-                "PUNTO-COMA": [],
-                "OPEREL":[],
-                "FIN-FUNC":[],
-                "FIN-SI": [],
-                "SINO" : [],
-                "HASTA" : [],
-                "ENTONCES":[],
-                "Parentesis Cerrado":[]},
-    
-    'Factor':{"Parentesis Abierto" : ['Parentesis Abierto',"Expresion","Parentesis Cerrado"],
-              "NUM" : ['NUM'],
-              "ID": ['ID']}
+    "Termino": {
+        "Parentesis Abierto": ["Factor", "Termino_prima"],
+        "NUM":                ["Factor", "Termino_prima"],
+        "ID":                 ["Factor", "Termino_prima"],
+    },
+
+    "Termino_prima": {
+        "OPMULT":    ["OPMULT", "Factor", "Termino_prima"],
+        "OPSUM":              [],
+        "OPREL":               [],
+        "Parentesis Cerrado":  [],
+        "#":                   [],
+        "PUNTO-COMA":          [],
+        "FINFUNC":             [],
+        "FINSI":               [],
+        "SINO":                [],
+        "HASTA":               [],
+        "ENTONCES":            [],
+    },
+
+    "Factor": {
+        "Parentesis Cerrado": ["Parentesis Abierto", "Expresion", "Parentesis Cerrado"],
+        "NUM":                ["NUM"],
+        "ID":                 ["ID"]
+    }
 }
-
-                
-

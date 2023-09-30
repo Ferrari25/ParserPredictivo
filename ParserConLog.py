@@ -33,11 +33,11 @@ def parser(codigo_fuente):
         
         datos_locales['error'] = False
         caracter_actual = datos_locales['lista_tokens'][datos_locales['index']][0]  # PUNTERO
-        if caracter_actual in dicSD[no_terminal]:
+        if caracter_actual in P[no_terminal]:
             logging.debug("----CARACTER ACTUAL")
             logging.debug(caracter_actual)
             logging.debug("el caracter actual ESTA en los SD del no terminal")
-            lado_derecho = dicSD[no_terminal][caracter_actual]
+            lado_derecho = P[no_terminal][caracter_actual]
             logging.debug(lado_derecho,"se mando a procesar")
             procesar(lado_derecho)
         else:
@@ -88,7 +88,7 @@ def parser(codigo_fuente):
 
     return principal()
 
-codigo_fuente = "mostrar x + 5"
+codigo_fuente = "si x < 10 entonces mostrar x finsi"
 w = lexer(codigo_fuente)
 print(w)
 print(parser(w))
