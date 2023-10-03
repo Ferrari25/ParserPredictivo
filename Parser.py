@@ -1,4 +1,3 @@
-#from Gramatica import *           
 from Lexer import * 
 from Gramatica_v2 import *
 from Automatas import * 
