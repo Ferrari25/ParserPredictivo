@@ -40,29 +40,9 @@ VT = ["Parentesis Cerrado",
       "ID",
       "#",]
 
-VN = [
-      "Program",
-      "ListaSentencias",
-      "ListaSentencias_p",
-      "Sentencia",
-      "SentenciaSi",
-      "SentenciaSi_p",
-      "SentenciaRepetir",
-      "SentenciaAsig",
-      "SentenciaLeer",
-      "SentenciaMostrar",
-      "SentenciaFun",
-      "Proc",
-      "ListaPar",
-      "ListaPar_p",
-      "Expresion",
-      "Expresion_p",
-      "Expresion2",
-      "Expresion2_p",
-      "Termino", 
-      "Termino_p",
-      "Factor",
-     ]
+VN = ["Program", "ListaSentencias", "ListaSentencias_p", "Sentencia", "SentenciaSi", "SentenciaSi_p", "SentenciaRepetir", "SentenciaAsig", "SentenciaLeer",
+      "SentenciaMostrar", "SentenciaFun", "Proc", "ListaPar", "ListaPar_p", "Expresion", "Expresion_p", "Expresion2", "Expresion2_p", "Termino", 
+      "Termino_p", "Factor", ]
 
 
 

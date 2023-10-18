@@ -38,6 +38,8 @@ def parser(codigo_fuente):
                 if datos_locales['error']:
                     break
         datos_locales['derivaciones'].append((no_terminal, derivacion_actual))
+    
+    
 
     def principal():
         pni('Program')
@@ -53,9 +55,21 @@ def parser(codigo_fuente):
     return datos_locales['derivaciones'][::-1]
 
 
-cadenas = ["id equal 3","mostrar x + 5"]
-for cadena in cadenas: 
-    derivaciones = parser(lexer(cadena))
-    print(f"\nDerivaciones para '{cadena}':")
-    for no_terminal, derivacion_actual in derivaciones:
-        print(f"{no_terminal} --> {' '.join(derivacion_actual)}")
+w1= "mostrar x + 5"
+w2= "func hello(x) hello equal 1234; mostrar hello finfunc"
+w3= "mostrar x equal 5"
+w4= "repetir leer vuxi hasta vauxi > variable"
+w5= "leer variable"
+w6= "si 5>5 entonces mostrar x + 5 finsi"
+w7= "si 5>5 entonces mostrar id1  mostrar id2 finsi"
+w8="leer x; leer y; si x>y entonces x equal x+y sino y equal x+y finsi"
+w9="func rest(n1; n2) x equal n1 - n2; mostrar x finfunc"
+w10="vmax equal 0; repetir i equal i+1; si edad>vmax entonces msocio equal socio finsi hasta i=50"
+
+cadena = w8
+derivaciones = parser(lexer(cadena))
+print(f"\nDerivaciones para '{cadena}':")
+for no_terminal, derivacion_actual in derivaciones:
+    print(f"{no_terminal} --> {' '.join(derivacion_actual)}")
+    
+    

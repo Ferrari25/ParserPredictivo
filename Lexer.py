@@ -37,16 +37,17 @@ def lexer(codigo_fuente):
         if len(posibles_tokens) == 0:
             print("ERROR: TOKEN DESCONOCIDO - LEXER FALLO" + lexema)
         else:
-            posicion_actual = posicion_actual - 1                                       #
-            un_tipo_de_token = posibles_tokens[0]                                       #
-            token= (un_tipo_de_token,codigo_fuente[comienzo_lexema:posicion_actual])    #
-            tokens.append(token)                                                        #
+            posicion_actual = posicion_actual - 1                                       
+            un_tipo_de_token = posibles_tokens[0]                                       
+            token= (un_tipo_de_token,codigo_fuente[comienzo_lexema:posicion_actual])    
+            tokens.append(token)                                                        
         
     return tokens 
 
 
 TOKENS_POSIBLES = [("SI", automata_si),
                    ("FINSI", automata_finsi),
+                   ("SINO", automata_sino),
                    ("OPSUMA", automata_opsuma),
                    ("OPMULT", automata_opmult),
                    ("EQUAL", automata_equal),
